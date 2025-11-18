@@ -17,7 +17,7 @@ collection = client.get_or_create_collection(
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
 #Streamlit UI
-st.title("🌱 Sustainability Semantic Search Engine")
+st.title("Sustainability Semantic Search Engine")
 st.write("Search across sustainability, ESG, and environmental commitments from major companies.")
 
 query = st.text_input("Enter your search query:")

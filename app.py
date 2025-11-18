@@ -2,6 +2,9 @@
 #No AI was used to generate this code, authored by HG 11/18/25
 
 #initial imports
+#v2 import adding os and pandas for huggingface readability, failed last push
+import os
+import pandas as pd
 import streamlit as st
 import chromadb
 from sentence_transformers import SentenceTransformer

@@ -1,0 +1,47 @@
+# Streamlit semantic search app for sustainability report insights
+#No AI was used to generate this code, authored by HG 11/18/25
+
+#initial imports
+import streamlit as st
+import chromadb
+from sentence_transformers import SentenceTransformer
+
+#Loading Chroma
+client = chromadb.PersistentClient(path="vector_store")
+collection = client.get_or_create_collection(
+    name="sustainability_sections",
+    metadata={"hnsw:space": "cosine"}
+)
+
+#Loading embedding model
+model = SentenceTransformer("all-MiniLM-L6-v2")
+
+#Streamlit UI
+st.title("🌱 Sustainability Semantic Search Engine")
+st.write("Search across sustainability, ESG, and environmental commitments from major companies.")
+
+query = st.text_input("Enter your search query:")
+st.caption("Example searches: *'renewable energy'*, *'carbon reduction'*, *'water stewardship'*, *'zero waste'*")
+
+
+if st.button("Search"):
+    if query.strip() == "":
+        st.warning("Please enter a query.")
+    else:
+        #Embedding user query
+        query_embedding = model.encode(query).tolist()
+
+        #Query Chroma
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=5
+        )
+
+        st.subheader("Top Results")
+
+        for i in range(len(results["documents"][0])):
+            st.markdown("---")
+            st.write(f"**Company:** {results['metadatas'][0][i]['company']}")
+            st.write(f"**Year:** {results['metadatas'][0][i]['year']}")
+            st.write(f"**Section:** {results['metadatas'][0][i]['section_title']}")
+            st.write(f"**Text:** {results['documents'][0][i]}")

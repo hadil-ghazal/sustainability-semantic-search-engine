@@ -1,3 +1,14 @@
+---
+title: Sustainability Semantic Search Engine
+colorFrom: green
+colorTo: gray
+sdk: streamlit
+sdk_version: "1.30.0"
+app_file: "app.py"
+pinned: false
+---
+
+
 # Sustainability Semantic Search Engine
 
 A semantic search engine for exploring sustainability and corporate responsibility insights from 2024 public company reports(looking at 2023 data). COmpanies include Apple, Amazon, UnitedHealth Group, Chevron, Citi, NVIDIA, Tesla, Coca-Cola (will expand more comapnies in next iteration)
